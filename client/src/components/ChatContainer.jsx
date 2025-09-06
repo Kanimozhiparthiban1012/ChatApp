@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useRef, useEffect } from 'react'
 import assets, { messagesDummyData } from '../assets/assets'
 import { formatMessageTime } from '../lib/utils'
 
@@ -7,7 +7,7 @@ const ChatContainer = ({selectedUser, setSelectedUser}) => {
   const scrollEnd = useRef()
   useEffect (() =>{
     if(scrollEnd.current){
-      scrollEnd.current.scrollIntoView({behaviour : "smooth"})
+      scrollEnd.current.scrollIntoView({ behavior: "smooth" })
     }
   },[])
   
@@ -48,6 +48,20 @@ const ChatContainer = ({selectedUser, setSelectedUser}) => {
       ))}
       <div ref={scrollEnd}></div>
     </div>
+{/*-------Bottom are---------*/}
+
+<div className='absolute bottom-0 left-0 right-0 flex items-center gap-3 p-3'>
+  <div className='flex-1 flex items-center bg-gray-700 px-3 rounded-full'>
+    <input type="text" placeholder="Send a message"
+    className='flex-1 text-sm p-3 border-none outline-none text-white placeholder-gray-400 bg-transparent'/>
+    <input type="file" id="image" accept='image/png, image/jpeg' hidden />
+    <label htmlFor="image" className="cursor-pointer">
+      <img src={assets.gallery_icon} alt="" className="w-5 ml-2" />
+    </label>
+  </div>
+  <img src={assets.send_button} alt="" className="w-7 cursor-pointer" />
+</div>
+
   </div>
   ) : (
     <div className='flex flex-col items-center justify-center gap-2 text-gray-500 bg-white/10 max-md:hidden'> 
